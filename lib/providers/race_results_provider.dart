@@ -33,8 +33,6 @@ class RaceResultsProvider extends ChangeNotifier {
           .toList();
       _isLoading = false;
       notifyListeners();
-    } else {
-      print('Failed to load race results');
     }
   }
 }

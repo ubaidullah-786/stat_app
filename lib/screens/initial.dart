@@ -32,5 +32,7 @@ class _InitialScreenState extends State<InitialScreen> {
 }
 
 Future<void> fetchDriverStandings() async {
-  await Future.delayed(const Duration(seconds: 2)); 
+  await Future.delayed(
+    const Duration(seconds: 5),
+  );
 }

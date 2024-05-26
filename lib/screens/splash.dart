@@ -32,23 +32,38 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SvgPicture.asset(
-              'assets/f1_logo.svg',
-              width: 50,
-              height: 50,
-              colorFilter: const ColorFilter.mode(
-                Color.fromARGB(255, 255, 17, 0),
-                BlendMode.srcIn,
-              ),
+      body: Stack(
+        children: [
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SvgPicture.asset(
+                  'assets/f1_logo.svg',
+                  width: 50,
+                  height: 50,
+                  colorFilter: const ColorFilter.mode(
+                    Color.fromARGB(255, 239, 3, 2),
+                    BlendMode.srcIn,
+                  ),
+                ),
+                const SizedBox(
+                  height: 60,
+                ),
+                const CircularProgressIndicator(),
+              ],
             ),
-            const SizedBox(height: 30),
-            const CircularProgressIndicator(),
-          ],
-        ),
+          ),
+          const Positioned(
+            bottom: 20,
+            left: 0,
+            right: 0,
+            child: Text(
+              'Created with ❤',
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ],
       ),
     );
   }

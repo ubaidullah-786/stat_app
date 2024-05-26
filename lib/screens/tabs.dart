@@ -15,8 +15,7 @@ class TabsScreen extends StatefulWidget {
 
 class _TabsScreenState extends State<TabsScreen> with TickerProviderStateMixin {
   late TabController _tabController;
-  int _selectedIndex = 0; // Track the selected index
-
+  int _selectedIndex = 0;
   @override
   void initState() {
     super.initState();

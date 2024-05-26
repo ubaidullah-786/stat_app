@@ -24,30 +24,27 @@ class StandingsProvider extends ChangeNotifier {
     final response = await http.get(url);
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
-      final standingsList =
-          data['MRData']['StandingsTable']['StandingsLists'][0]['DriverStandings'] as List;
-      _driverStandings = standingsList.map((json) => DriverStanding.fromJson(json)).toList();
+      final standingsList = data['MRData']['StandingsTable']['StandingsLists']
+          [0]['DriverStandings'] as List;
+      _driverStandings =
+          standingsList.map((json) => DriverStanding.fromJson(json)).toList();
       notifyListeners();
-    } else {
-      // Handle the error
-      print('Failed to load driver standings');
     }
   }
 
   Future<void> fetchConstructorStandings() async {
-    final url = Uri.https('ergast.com', '/api/f1/current/constructorStandings.json');
+    final url =
+        Uri.https('ergast.com', '/api/f1/current/constructorStandings.json');
     final response = await http.get(url);
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
-      print(data);
-      final standingsList =
-          data['MRData']['StandingsTable']['StandingsLists'][0]['ConstructorStandings'] as List;
-      _constructorStandings =
-          standingsList.map((json) => ConstructorStanding.fromJson(json)).toList();
+
+      final standingsList = data['MRData']['StandingsTable']['StandingsLists']
+          [0]['ConstructorStandings'] as List;
+      _constructorStandings = standingsList
+          .map((json) => ConstructorStanding.fromJson(json))
+          .toList();
       notifyListeners();
-    } else {
-      // Handle the error
-      print('Failed to load constructor standings');
     }
     _isLoading = false;
     notifyListeners();

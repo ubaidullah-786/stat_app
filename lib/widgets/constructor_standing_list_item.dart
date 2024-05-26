@@ -6,12 +6,14 @@ import 'package:stats_app/screens/constructor_details.dart';
 class ConstructorStandingListItem extends StatelessWidget {
   final ConstructorStanding constructorStanding;
 
-  const ConstructorStandingListItem({required this.constructorStanding, super.key});
+  const ConstructorStandingListItem(
+      {required this.constructorStanding, super.key});
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      contentPadding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+      contentPadding:
+          const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
       title: Row(
         children: [
           Text(
@@ -45,7 +47,8 @@ class ConstructorStandingListItem extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => ConstructorDetails(constructorStanding: constructorStanding),
+            builder: (context) =>
+                ConstructorDetails(constructorStanding: constructorStanding),
           ),
         );
       },
