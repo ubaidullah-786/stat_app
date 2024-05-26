@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:stats_app/providers/standing_provider.dart';
-import 'package:stats_app/providers/race_results_provider.dart'; // Import the RaceResultsProvider
+import 'package:stats_app/providers/race_results_provider.dart';
+import 'package:stats_app/providers/schedule_provider.dart';
 import 'package:stats_app/screens/constructor_standings.dart';
 import 'package:stats_app/screens/driver_standings.dart';
-import 'package:stats_app/screens/race_results.dart'; // Import the RaceResultsScreen
+import 'package:stats_app/screens/race_results.dart';
+import 'package:stats_app/screens/schedule.dart';
 
 class TabsScreen extends StatefulWidget {
   const TabsScreen({super.key});
@@ -16,6 +18,7 @@ class TabsScreen extends StatefulWidget {
 class _TabsScreenState extends State<TabsScreen> with TickerProviderStateMixin {
   late TabController _tabController;
   int _selectedIndex = 0;
+
   @override
   void initState() {
     super.initState();
@@ -28,6 +31,16 @@ class _TabsScreenState extends State<TabsScreen> with TickerProviderStateMixin {
     super.dispose();
   }
 
+  void _onTabTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+
+    if (index == 2) {
+      Provider.of<ScheduleProvider>(context, listen: false).fetchData();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -35,8 +48,21 @@ class _TabsScreenState extends State<TabsScreen> with TickerProviderStateMixin {
       child: Scaffold(
         backgroundColor: const Color.fromARGB(255, 71, 70, 70),
         appBar: AppBar(
-          title:
-              Text(_selectedIndex == 0 ? 'STANDINGS' : 'WEEKLY RACE RESULTS',style: const TextStyle(fontFamily: 'RezervBold'),),
+          title: Consumer<RaceResultsProvider>(
+            builder: (context, raceResultsProvider, child) {
+              return Text(
+                _selectedIndex == 0
+                    ? 'STANDINGS'
+                    : _selectedIndex == 1
+                        ? raceResultsProvider.eventName
+                        : 'SCHEDULE',
+                style: const TextStyle(
+                  fontFamily: 'RezervBold',
+                ),
+                textAlign: TextAlign.center,
+              );
+            },
+          ),
           backgroundColor: const Color.fromARGB(255, 239, 3, 2),
           foregroundColor: Colors.white,
           centerTitle: true,
@@ -72,11 +98,13 @@ class _TabsScreenState extends State<TabsScreen> with TickerProviderStateMixin {
                   );
                 },
               )
-            : Consumer<RaceResultsProvider>(
-                builder: (context, raceResultsProvider, child) {
-                  return const RaceResultsScreen();
-                },
-              ),
+            : _selectedIndex == 1
+                ? Consumer<RaceResultsProvider>(
+                    builder: (context, raceResultsProvider, child) {
+                      return const RaceResultsScreen();
+                    },
+                  )
+                : const ScheduleScreen(),
         bottomNavigationBar: Container(
           decoration: const BoxDecoration(
             border: Border(
@@ -87,11 +115,7 @@ class _TabsScreenState extends State<TabsScreen> with TickerProviderStateMixin {
             ),
           ),
           child: BottomNavigationBar(
-            onTap: (index) {
-              setState(() {
-                _selectedIndex = index;
-              });
-            },
+            onTap: _onTabTapped,
             currentIndex: _selectedIndex,
             selectedItemColor: const Color.fromARGB(255, 255, 17, 0),
             unselectedItemColor: Colors.grey,
@@ -102,7 +126,7 @@ class _TabsScreenState extends State<TabsScreen> with TickerProviderStateMixin {
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.flag),
-                label: 'Race results',
+                label: 'Weekly results',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.schedule),

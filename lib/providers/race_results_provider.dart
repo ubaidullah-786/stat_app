@@ -11,6 +11,9 @@ class RaceResultsProvider extends ChangeNotifier {
   bool _isLoading = true;
   bool get isLoading => _isLoading;
 
+  String _eventName = ''; // Add this line
+  String get eventName => _eventName; // Add this getter
+
   RaceResultsProvider() {
     fetchRaceResults();
   }
@@ -23,12 +26,12 @@ class RaceResultsProvider extends ChangeNotifier {
       final data = json.decode(response.body);
       final resultsList =
           data['MRData']['RaceTable']['Races'][0]['Results'] as List;
-      final raceName =
-          data['MRData']['RaceTable']['Races'][0]['raceName'] as String;
+      _eventName =
+          data['MRData']['RaceTable']['Races'][0]['raceName'] as String; // Assign event name
       _raceResults = resultsList
           .map((json) => RaceResult.fromJson({
                 ...json,
-                'raceName': raceName,
+                'raceName': _eventName,
               }))
           .toList();
       _isLoading = false;

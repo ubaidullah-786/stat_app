@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:stats_app/screens/initial.dart';
 import 'package:stats_app/providers/standing_provider.dart';
-import 'package:stats_app/providers/race_results_provider.dart'; // Import RaceResultsProvider
+import 'package:stats_app/providers/race_results_provider.dart';// Import RaceResultsProvider
+import 'package:stats_app/providers/schedule_provider.dart';// Import RaceResultsProvider
 
 final theme = ThemeData(
   useMaterial3: true,
@@ -17,7 +18,8 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => StandingsProvider()),
-        ChangeNotifierProvider(create: (_) => RaceResultsProvider()), // Add RaceResultsProvider
+        ChangeNotifierProvider(create: (_) => RaceResultsProvider()),
+        ChangeNotifierProvider(create: (_) => ScheduleProvider()),
       ],
       child: const App(),
     ),

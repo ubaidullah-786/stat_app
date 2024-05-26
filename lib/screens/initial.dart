@@ -20,9 +20,11 @@ class _InitialScreenState extends State<InitialScreen> {
 
   Future<void> _fetchData() async {
     await fetchDriverStandings(); // Call the actual data fetching function
-    setState(() {
-      isLoading = false;
-    });
+    if (mounted) {
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
 
   @override

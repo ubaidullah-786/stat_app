@@ -60,6 +60,7 @@ class _SplashScreenState extends State<SplashScreen> {
             right: 0,
             child: Text(
               'Created with ❤',
+              style: TextStyle(fontSize: 18),
               textAlign: TextAlign.center,
             ),
           ),
