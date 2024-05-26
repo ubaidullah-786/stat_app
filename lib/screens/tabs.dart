@@ -31,24 +31,29 @@ class _TabsScreenState extends State<TabsScreen> with TickerProviderStateMixin {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        backgroundColor: const Color.fromARGB(255, 71, 70, 70),
         appBar: AppBar(
           title: const Text('STANDINGS'),
           backgroundColor: const Color.fromARGB(255, 255, 17, 0),
           foregroundColor: Colors.white,
           centerTitle: true,
           bottom: TabBar(
-  controller: _tabController,
-  labelColor: Colors.white,
-  indicator: const UnderlineTabIndicator(
-    borderSide: BorderSide(width: 6.0, color: Colors.white),
-    insets: EdgeInsets.symmetric(horizontal: 4.0),
-  ),
-  tabs: const [
-    Tab(text: 'Drivers'),
-    Tab(text: 'Constructors'),
-  ],
-),
-
+            controller: _tabController,
+            labelStyle: const TextStyle(
+              fontFamily: 'RezervBold',
+            ),
+            unselectedLabelStyle: const TextStyle(fontFamily: 'Rezerv'),
+            unselectedLabelColor: Colors.white,
+            labelColor: Colors.white,
+            indicator: const UnderlineTabIndicator(
+              borderSide: BorderSide(width: 6.0, color: Colors.white),
+              insets: EdgeInsets.symmetric(horizontal: 4.0),
+            ),
+            tabs: const [
+              Tab(text: 'Drivers'),
+              Tab(text: 'Constructors'),
+            ],
+          ),
         ),
         body: Consumer<StandingsProvider>(
           builder: (context, standingsProvider, child) {
@@ -81,6 +86,10 @@ class _TabsScreenState extends State<TabsScreen> with TickerProviderStateMixin {
               BottomNavigationBarItem(
                 icon: Icon(Icons.insert_chart),
                 label: 'Standings',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.flag),
+                label: 'Race results',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.schedule),

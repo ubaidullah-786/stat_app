@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-// import 'package:stats_app/models/driver_standings_model.dart';
 import 'package:stats_app/providers/standing_provider.dart';
 import 'package:stats_app/widgets/driver_standing_list_item.dart';
 

@@ -10,14 +10,17 @@ class ConstructorStandingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final standingsProvider = Provider.of<StandingsProvider>(context);
 
-    return standingsProvider.isLoading
-        ? const Center(child: CircularProgressIndicator())
-        : ListView.builder(
-            itemCount: standingsProvider.constructorStandings.length,
-            itemBuilder: (context, index) {
-              final constructorStanding = standingsProvider.constructorStandings[index];
-              return ConstructorStandingListItem(constructorStanding: constructorStanding);
-            },
-          );
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: standingsProvider.isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : ListView.builder(
+              itemCount: standingsProvider.constructorStandings.length,
+              itemBuilder: (context, index) {
+                final constructorStanding = standingsProvider.constructorStandings[index];
+                return ConstructorStandingListItem(constructorStanding: constructorStanding);
+              },
+            ),
+    );
   }
 }

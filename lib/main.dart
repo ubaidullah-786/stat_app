@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+// import 'package:google_fonts/google_fonts.dart';
 import 'package:stats_app/screens/initial.dart';
 import 'package:provider/provider.dart';
 import 'package:stats_app/providers/standing_provider.dart';
@@ -9,7 +9,7 @@ final theme = ThemeData(
   colorScheme: ColorScheme.fromSeed(
     seedColor: Colors.white,
   ),
-  textTheme: GoogleFonts.latoTextTheme(),
+  fontFamily: 'Rezerv',
 );
 
 void main() {

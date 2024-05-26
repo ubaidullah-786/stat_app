@@ -1,6 +1,7 @@
 // widgets/constructor_standing_list_item.dart
 import 'package:flutter/material.dart';
 import 'package:stats_app/models/constructor_standing_model.dart';
+import 'package:stats_app/screens/constructor_details.dart';
 
 class ConstructorStandingListItem extends StatelessWidget {
   final ConstructorStanding constructorStanding;
@@ -10,7 +11,7 @@ class ConstructorStandingListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      contentPadding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 6.0),
+      contentPadding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
       title: Row(
         children: [
           Text(
@@ -41,7 +42,13 @@ class ConstructorStandingListItem extends StatelessWidget {
         ),
       ),
       trailing: const Icon(Icons.arrow_forward_ios),
-      onTap: () {},
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => ConstructorDetails(constructorStanding: constructorStanding),
+          ),
+        );
+      },
     );
   }
 }

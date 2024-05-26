@@ -39,6 +39,7 @@ class StandingsProvider extends ChangeNotifier {
     final response = await http.get(url);
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
+      print(data);
       final standingsList =
           data['MRData']['StandingsTable']['StandingsLists'][0]['ConstructorStandings'] as List;
       _constructorStandings =
