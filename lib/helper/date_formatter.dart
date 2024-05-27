@@ -14,16 +14,10 @@ class DateFormatter {
       "Nov",
       "Dec"
     ];
-    return dateTime.day.toString() +
-        " " +
-        months[dateTime.month - 1] +
-        " " +
-        dateTime.year.toString();
+    return "${dateTime.day} ${months[dateTime.month - 1]} ${dateTime.year}";
   }
 
   static String getFormattedTime(DateTime dateTime) {
-    return dateTime.hour.toString() +
-        ":" +
-        dateTime.minute.toString().padLeft(2, "0");
+    return "${dateTime.hour}:${dateTime.minute.toString().padLeft(2, "0")}";
   }
 }

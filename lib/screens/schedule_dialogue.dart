@@ -22,6 +22,7 @@ class ScheduleDialog extends StatefulWidget {
 }
 
 class _ScheduleDialogState extends State<ScheduleDialog> {
+  @override
   initState() {
     super.initState();
     getData(
@@ -37,7 +38,7 @@ class _ScheduleDialogState extends State<ScheduleDialog> {
   Future<void> getData(String wikipediaTitle) async {
     try {
       var url = Uri.https('en.wikipedia.org',
-          '/api/rest_v1/page/summary/' + Uri.decodeComponent(wikipediaTitle));
+          '/api/rest_v1/page/summary/${Uri.decodeComponent(wikipediaTitle)}');
 
       // Await the http get response, then decode the json-formatted response.
       var response = await http.get(url);
@@ -50,7 +51,6 @@ class _ScheduleDialogState extends State<ScheduleDialog> {
           imageLink = jsonResponse["thumbnail"]["source"];
         });
       } else {
-        print('Request failed with status: ${response.statusCode}.');
         if (!isTriedGetData) {
           getData(widget.wikipedia);
           isTriedGetData = true;
@@ -61,7 +61,6 @@ class _ScheduleDialogState extends State<ScheduleDialog> {
         }
       }
     } catch (e) {
-      print(e);
       setState(() {
         about = "No data found";
       });
@@ -75,46 +74,44 @@ class _ScheduleDialogState extends State<ScheduleDialog> {
   }
 
   _dialog(eventName, DateTime eventTime, eventLoc, eventUrl) {
-    return Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                eventName,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              Text(
-                DateFormatter.getFormattedDate(eventTime),
-                style: TextStyle(fontSize: 15),
-                overflow: TextOverflow.ellipsis,
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(eventLoc, style: TextStyle(fontSize: 15)),
-              Text(DateFormatter.getFormattedTime(eventTime),
-                  style: TextStyle(fontSize: 15)),
-            ],
-          ),
-          SizedBox(height: 10),
-          CachedNetworkImage(
-            imageUrl: eventUrl,
-            progressIndicatorBuilder: (context, url, downloadProgress) =>
-                Center(
-              child: CircularProgressIndicator(),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        const SizedBox(height: 10),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              eventName,
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            errorWidget: (context, url, error) => const Icon(Icons.error),
+            Text(
+              DateFormatter.getFormattedDate(eventTime),
+              style: const TextStyle(fontSize: 15),
+              overflow: TextOverflow.ellipsis,
+            ),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(eventLoc, style: const TextStyle(fontSize: 15)),
+            Text(DateFormatter.getFormattedTime(eventTime),
+                style: const TextStyle(fontSize: 15)),
+          ],
+        ),
+        const SizedBox(height: 10),
+        CachedNetworkImage(
+          imageUrl: eventUrl,
+          progressIndicatorBuilder: (context, url, downloadProgress) =>
+              const Center(
+            child: CircularProgressIndicator(),
           ),
-          SizedBox(height: 10),
-        ],
-      ),
+          errorWidget: (context, url, error) => const Icon(Icons.error),
+        ),
+        const SizedBox(height: 10),
+      ],
     );
   }
 }

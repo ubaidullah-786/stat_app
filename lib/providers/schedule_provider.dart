@@ -7,12 +7,20 @@ class ScheduleProvider with ChangeNotifier {
   List<Race> _races = [];
   bool _isLoading = false;
   bool _hasError = false;
+  bool _isDataFetched = false;  // Add this flag
 
   List<Race> get races => _races;
   bool get isLoading => _isLoading;
   bool get hasError => _hasError;
+  bool get isDataFetched => _isDataFetched;  // Add getter for the flag
+
+  ScheduleProvider() {
+    fetchData();
+  }
 
   Future<void> fetchData() async {
+    if (_isDataFetched) return;  // Prevent re-fetching
+
     _isLoading = true;
     _hasError = false;
     notifyListeners();
@@ -24,6 +32,7 @@ class ScheduleProvider with ChangeNotifier {
         var jsonResponse = convert.jsonDecode(response.body) as Map<String, dynamic>;
         var raceList = jsonResponse["MRData"]["RaceTable"]["Races"].toList();
         _races = _parseRaces(raceList);
+        _isDataFetched = true;  // Set flag after fetching data
       } else {
         _hasError = true;
       }

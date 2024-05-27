@@ -38,8 +38,7 @@ class ScheduleScreen extends StatelessWidget {
               CalendarAppointmentDetails calendarAppointmentDetails) {
             return Container(
               decoration: BoxDecoration(
-                color: calendarAppointmentDetails.appointments.first
-                    .getBackground(),
+                color: calendarAppointmentDetails.appointments.first.getBackground(),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Padding(
@@ -75,12 +74,12 @@ class ScheduleScreen extends StatelessWidget {
             String eventName = details.appointments?[0].getEventName() ?? "";
             String eventLoc = details.appointments?[0].getEventLoc() ?? "";
 
-            DateTime eventDate = details.appointments?[0].getFrom() ?? "";
+            DateTime eventDate = details.appointments?[0].getFrom() ?? DateTime.now();
             String year = eventDate.year.toString();
 
             String eventUrl = details.appointments?[0]
                     .getEventUrl()
-                    .replaceAll(year + "_", "") ??
+                    .replaceAll("${year}_", "") ??
                 "";
             if (details.appointments?[0].getEventName() != null) {
               showDialog<void>(
@@ -111,8 +110,6 @@ class ScheduleScreen extends StatelessWidget {
   }
 
   Widget _error() {
-    return Container(
-      child: Center(child: Image.asset("assets/images/error.png")),
-    );
+    return Center(child: Image.asset("assets/error.png"));
   }
 }
