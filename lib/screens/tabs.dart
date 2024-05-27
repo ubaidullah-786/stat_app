@@ -7,6 +7,7 @@ import 'package:stats_app/screens/constructor_standings.dart';
 import 'package:stats_app/screens/driver_standings.dart';
 import 'package:stats_app/screens/race_results.dart';
 import 'package:stats_app/screens/schedule.dart';
+import 'package:stats_app/widgets/main_drawer.dart';
 
 class TabsScreen extends StatefulWidget {
   const TabsScreen({super.key});
@@ -86,6 +87,7 @@ class _TabsScreenState extends State<TabsScreen> with TickerProviderStateMixin {
                 )
               : null,
         ),
+        drawer: MainDrawer(onSelectScreen: _onTabTapped), // Add Drawer here
         body: _selectedIndex == 0
             ? Consumer<StandingsProvider>(
                 builder: (context, standingsProvider, child) {

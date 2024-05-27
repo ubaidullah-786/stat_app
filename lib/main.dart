@@ -8,7 +8,7 @@ import 'package:stats_app/providers/schedule_provider.dart';// Import RaceResult
 final theme = ThemeData(
   useMaterial3: true,
   colorScheme: ColorScheme.fromSeed(
-    seedColor: Colors.white,
+    seedColor: const Color.fromARGB(255, 239, 3, 2),
   ),
   fontFamily: 'Rezerv',
 );
