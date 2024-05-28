@@ -64,7 +64,7 @@ class _TabsScreenState extends State<TabsScreen> with TickerProviderStateMixin {
               );
             },
           ),
-          backgroundColor: const Color.fromARGB(255, 239, 3, 2),
+          backgroundColor: const Color.fromARGB(255, 255, 0, 0),
           foregroundColor: Colors.white,
           centerTitle: true,
           bottom: _selectedIndex == 0

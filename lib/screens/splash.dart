@@ -43,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   width: 50,
                   height: 50,
                   colorFilter: const ColorFilter.mode(
-                    Color.fromARGB(255, 239, 3, 2),
+                    Color.fromARGB(255, 255, 0, 0),
                     BlendMode.srcIn,
                   ),
                 ),

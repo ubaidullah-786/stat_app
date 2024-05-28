@@ -28,7 +28,7 @@ class MainDrawer extends StatelessWidget {
             child: Row(
               children: [
                 Icon(
-                  Icons.sports_motorsports,
+                  Icons.handshake,
                   size: 48,
                   color: Theme.of(context).colorScheme.primary,
                 ),
@@ -45,19 +45,19 @@ class MainDrawer extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.all(16.0),
             child: Text(
-              'Our Ultimate F1 Standings and Stats Companion',
+              'From the track to your palm',
               style: TextStyle(fontSize: 16),
               textAlign: TextAlign.center,
             ),
           ),
-          SwitchListTile(
-            title: const Text('Notifications'),
-            value: true,
-            onChanged: (bool value) {
-              // Handle the toggle here
-            },
-          ),
-          const SizedBox(height: 20),
+          // SwitchListTile(
+          //   title: const Text('Notifications'),
+          //   value: true,
+          //   onChanged: (bool value) {
+          //     // Handle the toggle here
+          //   },
+          // ),
+          // const SizedBox(height: 20),
         ],
       ),
     );
